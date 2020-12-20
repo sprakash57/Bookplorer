@@ -1,3 +1,4 @@
 import { writable } from 'svelte/store';
 
-export const results = writable({ kind: '', totalItems: 0, items: [] });
+export const results = writable({ kind: '', items: [] });
+export const pagination = writable({ searchedTerm: '', count: 12 });

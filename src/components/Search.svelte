@@ -1,15 +1,18 @@
 <script>
-    import { results } from "../stores";
-    let searchedTerm = "";
+    import { URL } from "../constants";
+
+    import { results, pagination } from "../stores";
+
     function onSubmit(e) {
         e.preventDefault();
-        console.dir(e.target);
-        fetch(
-            `https://www.googleapis.com/books/v1/volumes?q=${e.target.book.value}&orderBy=newest`
-        )
+        fetch(`${URL}${e.target.book.value}&maxResults=12`)
             .then((data) => data.json())
             .then((response) => results.update(() => response))
             .catch((err) => console.log(err));
+        pagination.update((value) => ({
+            ...value,
+            searchedTerm: e.target.book.value,
+        }));
     }
 </script>
 

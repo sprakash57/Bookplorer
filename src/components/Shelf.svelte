@@ -1,13 +1,36 @@
 <script>
     import { onDestroy } from "svelte";
-    import { results } from "../stores";
+    import { get } from "svelte/store";
+    import { pagination, results } from "../stores";
+    import { fetchBooks } from "../utils";
     import Book from "./Book.svelte";
 
-    let books = [];
+    let books = [],
+        showMore = true,
+        fetching;
     let unsubscribe = results.subscribe((value) => {
+        showMore = !!value.items.length;
         books = value.items;
     });
+
     onDestroy(unsubscribe);
+
+    async function fetchMore() {
+        let { searchedTerm, count } = get(pagination);
+        count += 12;
+        const res = await fetchBooks(searchedTerm, count);
+        const data = await res.json();
+        if (res.ok) {
+            results.update(() => data);
+            pagination.update((value) => ({ ...value, count }));
+        } else {
+            throw new Error(data);
+        }
+    }
+
+    function handleShowMore() {
+        fetching = fetchMore();
+    }
 </script>
 
 <style lang="scss">
@@ -17,6 +40,17 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             grid-gap: 1rem;
+        }
+    }
+    .show-more {
+        border: none;
+        background: none;
+        font-size: 1.2rem;
+        margin: 10px auto;
+        display: flex;
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
         }
     }
 </style>
@@ -29,8 +63,17 @@
                     title={book.volumeInfo.title}
                     image={book.volumeInfo.imageLinks?.smallThumbnail || 'https://via.placeholder.com/128x192.png?text=No+cover'} />
             {/each}
-        {:else}
-            <div>Loading...</div>
         {/if}
     </ul>
+    <section>
+        {#await fetching}
+            <div>Loading...</div>
+        {:then}
+            {#if showMore}
+                <button on:click={handleShowMore} class="show-more">Show More</button>
+            {/if}
+        {:catch error}
+            <p style="color: red">{error.message}</p>
+        {/await}
+    </section>
 </main>
