@@ -1,6 +1,7 @@
 <script>
     import { onDestroy } from "svelte";
     import { get } from "svelte/store";
+    import { DEFAULT_COVER } from "../constants";
     import { pagination, results } from "../stores";
     import { fetchBooks } from "../utils";
     import Book from "./Book.svelte";
@@ -34,13 +35,10 @@
 </script>
 
 <style lang="scss">
-    .container {
-        padding: 2rem;
-        > ul {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            grid-gap: 1rem;
-        }
+    .container ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
     }
     .show-more {
         border: none;
@@ -61,7 +59,10 @@
             {#each books as book}
                 <Book
                     title={book.volumeInfo.title}
-                    image={book.volumeInfo.imageLinks?.smallThumbnail || 'https://via.placeholder.com/128x192.png?text=No+cover'} />
+                    image={book.volumeInfo.imageLinks?.smallThumbnail || DEFAULT_COVER}
+                    author={book.volumeInfo?.authors}
+                    category={book.volumeInfo?.categories}
+                    selfLink={book.selfLink} />
             {/each}
         {/if}
     </ul>
