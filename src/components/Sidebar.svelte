@@ -1,7 +1,9 @@
 <script>
     import { onDestroy } from "svelte";
-    import { DEFAULT_COVER } from "../constants";
+    import { DEFAULT_COVER, tweetBuilder } from "../constants";
     import { sidebarContent } from "../stores";
+    import Badge from "./Badge.svelte";
+    import Button from "./Button.svelte";
 
     let bookContent;
 
@@ -17,23 +19,92 @@
     onDestroy(unsubscribe);
 </script>
 
+<style lang="scss">
+    .container {
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin: auto 0;
+        }
+        summary {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .image {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .pages {
+                text-align: center;
+                h1 {
+                    font-size: 2.5rem;
+                    margin-bottom: auto;
+                }
+            }
+        }
+    }
+    .description {
+        header {
+            padding: 5px;
+            background: tomato;
+            color: white;
+        }
+        p {
+            text-align: justify;
+        }
+    }
+    .twitter-share-button {
+        background: blue;
+        color: white;
+    }
+</style>
+
 <main>
     {#if bookContent}
-        <section>
+        <section class="container">
             <h1>{bookContent.volumeInfo.title}</h1>
             <summary>{bookContent.volumeInfo.subtitle || ''}</summary>
-            <figure>
-                <img
-                    src={bookContent.volumeInfo.imageLinks.thumbnail || DEFAULT_COVER}
-                    alt="poster" />
-                <figcaption>{bookContent.volumeInfo.pageCount}</figcaption>
-            </figure>
+            <Badge
+                categories={bookContent.volumeInfo.categories}
+                date={bookContent.volumeInfo.publishedDate} />
+            <article class="image">
+                <figure>
+                    <img
+                        src={bookContent.volumeInfo.imageLinks?.thumbnail || DEFAULT_COVER}
+                        alt="poster" />
+                </figure>
+                <div class="pages">
+                    <h1>{bookContent.volumeInfo.pageCount}</h1>
+                    <small>Pages</small>
+                </div>
+            </article>
         </section>
-        <section>Description</section>
-        <section>Author</section>
-        <section>Publication</section>
-        <button>Share</button>
-        <button>Buy</button>
+        <section class="description">
+            <header>Description</header>
+            {#if bookContent.volumeInfo.description}
+                <p>
+                    {@html bookContent.volumeInfo.description}
+                </p>
+            {/if}
+        </section>
+        <section class="description">
+            <header>Author</header>
+            <p>
+                {bookContent.volumeInfo.authors ? bookContent.volumeInfo.authors.join(', ') : ''}
+            </p>
+        </section>
+        <section class="description">
+            <header>Publication</header>
+            <p>Publisher: {bookContent.volumeInfo.publisher || ''}</p>
+            <p>Language: {bookContent.volumeInfo.language || ''}</p>
+        </section>
+        <a
+            target="__blank"
+            class="twitter-share-button"
+            href={tweetBuilder(bookContent.volumeInfo.title)}
+            data-size="large">
+            Tweet</a>
+        <Button />
     {:else}
         <div>Loading...</div>
     {/if}

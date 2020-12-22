@@ -23,7 +23,8 @@
 	}
 	.display-section {
 		flex-grow: 1;
-		max-width: 566px;
+		width: 500px;
+		max-width: 500px;
 	}
 </style>
 
