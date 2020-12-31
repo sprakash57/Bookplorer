@@ -36,6 +36,8 @@
 
 <style lang="scss">
     .container ul {
+        overflow-x: auto;
+        height: 58vh;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;

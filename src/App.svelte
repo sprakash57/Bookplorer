@@ -25,6 +25,21 @@
 		flex-grow: 1;
 		width: 500px;
 		max-width: 500px;
+		overflow-x: auto;
+		height: 90vh;
+		padding: 8px;
+	}
+	@media only screen and (max-width: 600px) {
+		.display-section {
+			position: absolute;
+			top: 0;
+			right: 0;
+			background: white;
+			overflow-x: auto;
+			height: 90vh;
+			width: fit-content;
+			padding: 8px;
+		}
 	}
 </style>
 

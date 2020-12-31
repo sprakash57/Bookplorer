@@ -43,7 +43,7 @@
             }
         }
     }
-    .description {
+    .section-header {
         header {
             padding: 5px;
             background: tomato;
@@ -79,24 +79,24 @@
                 </div>
             </article>
         </section>
-        <section class="description">
+        <section class="section-header">
+            <header>Author</header>
+            <p>
+                {bookContent.volumeInfo.authors ? bookContent.volumeInfo.authors.join(', ') : ''}
+            </p>
+        </section>
+        <section class="section-header">
+            <header>Publication</header>
+            <p>Publisher: {bookContent.volumeInfo.publisher || ''}</p>
+            <p>Language: {bookContent.volumeInfo.language || ''}</p>
+        </section>
+        <section class="section-header">
             <header>Description</header>
             {#if bookContent.volumeInfo.description}
                 <p>
                     {@html bookContent.volumeInfo.description}
                 </p>
             {/if}
-        </section>
-        <section class="description">
-            <header>Author</header>
-            <p>
-                {bookContent.volumeInfo.authors ? bookContent.volumeInfo.authors.join(', ') : ''}
-            </p>
-        </section>
-        <section class="description">
-            <header>Publication</header>
-            <p>Publisher: {bookContent.volumeInfo.publisher || ''}</p>
-            <p>Language: {bookContent.volumeInfo.language || ''}</p>
         </section>
         <a
             target="__blank"
