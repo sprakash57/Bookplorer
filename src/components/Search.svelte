@@ -29,21 +29,22 @@
         font-size: 3.5rem;
         font-weight: 100;
         font-family: cursive;
-        margin-top: 0;
-        margin-bottom: 16px;
+        margin: 0 auto 16px auto;
+        width: fit-content;
+        border-bottom: 1px solid;
+        padding: 0 16px 0 16px;
     }
 
     summary {
         color: #8db2e7;
         margin: 16px;
         font-family: cursive;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     input[type="search"] {
-        box-shadow: -2px 2px 9px 4px rgb(43 42 42 / 25%),
-            0px -4px 12px 0 rgba(255, 255, 255, 0.3);
-        border-radius: 5px;
+        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
+        border-radius: 15px;
         border: none;
         width: 70%;
         padding: 0.8rem;

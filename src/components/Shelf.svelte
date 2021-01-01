@@ -45,8 +45,14 @@
     .show-more {
         border: none;
         background: none;
-        font-size: 1.2rem;
+        font-size: 1rem;
+        font-family: cursive;
+        font-weight: bold;
+        padding: 0.7rem;
+        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
+        border-radius: 15px;
         margin: 10px auto;
+        color: #3d85ff;
         display: flex;
         &:hover {
             cursor: pointer;
@@ -73,7 +79,7 @@
             <div>Loading...</div>
         {:then}
             {#if showMore}
-                <button on:click={handleShowMore} class="show-more">Show More</button>
+                <button on:click={handleShowMore} class="show-more">Show more</button>
             {/if}
         {:catch error}
             <p style="color: red">{error.message}</p>
