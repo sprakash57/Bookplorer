@@ -1,29 +1,33 @@
+<script>
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+    function handleClick() {
+        dispatch("message");
+    }
+</script>
+
 <style lang="scss">
     .btn {
-        background: red;
-        color: white;
-        padding: 0.375rem 0.75rem;
-        background-color: rgba(204, 218, 226, 0.349);
-        box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
-            -8px -8px 16px 0 rgba(255, 255, 255, 0.5);
-        border-radius: 0.75rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         border: none;
-        outline: none;
-        line-height: 1.5;
-
+        background: none;
+        font-size: 1rem;
+        font-family: cursive;
+        font-weight: bold;
+        padding: 0.7rem;
+        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
+        border-radius: var(--rad-15);
+        color: var(--primary);
         &:active {
-            box-shadow: inset -8px -8px 16px 0px rgba(255, 255, 255, 0.5),
-                inset 6px 6px 10px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 3px 3px 4px #c2c2c2, 4px 4px 4px #f2f2f2;
+            border: none;
+            background: none;
         }
-
         &:hover {
-            color: rgba(139, 139, 139, 0.788);
             cursor: pointer;
         }
     }
 </style>
 
-<main><button class="btn">Buy on Amazon</button></main>
+<button on:click={handleClick} class="btn">
+    <slot />
+</button>

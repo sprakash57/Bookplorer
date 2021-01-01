@@ -24,7 +24,7 @@
     }
 
     h1 {
-        color: #3d85ff;
+        color: var(--primary);
         text-transform: uppercase;
         font-size: 3.5rem;
         font-weight: 100;
@@ -36,15 +36,15 @@
     }
 
     summary {
-        color: #8db2e7;
+        color: var(--secondary);
         margin: 16px;
         font-family: cursive;
         font-size: 1rem;
     }
 
     input[type="search"] {
-        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
-        border-radius: 15px;
+        box-shadow: inset 3px 3px 4px #c2c2c2, 4px 4px 4px #f2f2f2;
+        border-radius: var(--rad-20);
         border: none;
         width: 70%;
         padding: 0.8rem;

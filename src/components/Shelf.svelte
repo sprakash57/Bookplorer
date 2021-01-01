@@ -5,6 +5,7 @@
     import { pagination, results } from "../stores";
     import { fetchBooks } from "../utils";
     import Book from "./Book.svelte";
+    import Button from "./Button.svelte";
 
     let books = [],
         showMore = true,
@@ -43,21 +44,8 @@
         gap: 1rem;
     }
     .show-more {
-        border: none;
-        background: none;
-        font-size: 1rem;
-        font-family: cursive;
-        font-weight: bold;
-        padding: 0.7rem;
-        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
-        border-radius: 15px;
-        margin: 10px auto;
-        color: #3d85ff;
         display: flex;
-        &:hover {
-            cursor: pointer;
-            text-decoration: underline;
-        }
+        justify-content: center;
     }
 </style>
 
@@ -74,12 +62,12 @@
             {/each}
         {/if}
     </ul>
-    <section>
+    <section class="show-more">
         {#await fetching}
             <div>Loading...</div>
         {:then}
             {#if showMore}
-                <button on:click={handleShowMore} class="show-more">Show more</button>
+                <Button on:message={handleShowMore}>Show more</Button>
             {/if}
         {:catch error}
             <p style="color: red">{error.message}</p>

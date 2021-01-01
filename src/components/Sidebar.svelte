@@ -1,5 +1,7 @@
 <script>
     import { onDestroy } from "svelte";
+    import Icon from "svelte-awesome";
+    import { twitter, shoppingCart } from "svelte-awesome/icons";
     import { DEFAULT_COVER, tweetBuilder } from "../constants";
     import { sidebarContent } from "../stores";
     import Badge from "./Badge.svelte";
@@ -21,36 +23,47 @@
 
 <style lang="scss">
     .container {
-        h1 {
+        > h1 {
             text-align: center;
             font-size: 2rem;
             margin: auto 0;
+            color: var(--primary);
         }
         summary {
             text-align: center;
             margin-bottom: 8px;
+            font-weight: 600;
         }
         .image {
             display: flex;
             justify-content: space-evenly;
-            align-items: center;
-            .pages {
-                text-align: center;
-                h1 {
-                    font-size: 2.5rem;
-                    margin-bottom: auto;
-                }
-            }
+        }
+    }
+    .image-desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--primary);
+        }
+        > div {
+            text-align: center;
         }
     }
     .section-header {
         header {
-            padding: 5px;
-            background: tomato;
-            color: white;
+            box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
+            border-radius: var(--rad-5);
+            padding: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
         }
         p {
             text-align: justify;
+            margin-left: 0.6rem;
         }
     }
     .twitter-share-button {
@@ -59,7 +72,7 @@
     }
 </style>
 
-<main>
+<div>
     {#if bookContent}
         <section class="container">
             <h1>{bookContent.volumeInfo.title}</h1>
@@ -67,17 +80,29 @@
             <Badge
                 categories={bookContent.volumeInfo.categories}
                 date={bookContent.volumeInfo.publishedDate} />
-            <article class="image">
-                <figure>
-                    <img
-                        src={bookContent.volumeInfo.imageLinks?.thumbnail || DEFAULT_COVER}
-                        alt="poster" />
-                </figure>
-                <div class="pages">
-                    <h1>{bookContent.volumeInfo.pageCount}</h1>
-                    <small>Pages</small>
+            <section class="image">
+                <div>
+                    <figure>
+                        <img
+                            src={bookContent.volumeInfo.imageLinks?.thumbnail || DEFAULT_COVER}
+                            alt="poster" />
+                    </figure>
                 </div>
-            </article>
+                <div class="image-desc">
+                    <div>
+                        <h1>{bookContent.volumeInfo.pageCount}</h1>
+                        <small>Pages</small>
+                    </div>
+                    <div>
+                        <Button>
+                            <Icon data={twitter} />
+                        </Button>
+                        <Button>
+                            <Icon data={shoppingCart} />
+                        </Button>
+                    </div>
+                </div>
+            </section>
         </section>
         <section class="section-header">
             <header>Author</header>
@@ -90,14 +115,14 @@
             <p>Publisher: {bookContent.volumeInfo.publisher || ''}</p>
             <p>Language: {bookContent.volumeInfo.language || ''}</p>
         </section>
-        <section class="section-header">
+        <article class="section-header">
             <header>Description</header>
             {#if bookContent.volumeInfo.description}
                 <p>
                     {@html bookContent.volumeInfo.description}
                 </p>
             {/if}
-        </section>
+        </article>
         <a
             target="__blank"
             class="twitter-share-button"
@@ -108,4 +133,4 @@
     {:else}
         <div>Loading...</div>
     {/if}
-</main>
+</div>
