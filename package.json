@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "sirv-cli": "^1.0.0",
-    "svelte-awesome": "^2.3.0"
+    "svelte-awesome": "^2.3.0",
+    "svelte-share-buttons-component": "^1.2.1"
   }
 }

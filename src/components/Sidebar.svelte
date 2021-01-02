@@ -1,11 +1,12 @@
 <script>
     import { onDestroy } from "svelte";
     import Icon from "svelte-awesome";
-    import { twitter, shoppingCart } from "svelte-awesome/icons";
+    import { shareAlt, shoppingCart } from "svelte-awesome/icons";
     import { DEFAULT_COVER, tweetBuilder } from "../constants";
     import { sidebarContent } from "../stores";
     import Badge from "./Badge.svelte";
     import Button from "./Button.svelte";
+    import Popup from "./Popup.svelte";
 
     let bookContent;
 
@@ -66,10 +67,6 @@
             margin-left: 0.6rem;
         }
     }
-    .twitter-share-button {
-        background: blue;
-        color: white;
-    }
 </style>
 
 <div>
@@ -94,11 +91,13 @@
                         <small>Pages</small>
                     </div>
                     <div>
+                        <Popup title={bookContent.volumeInfo.title}>
+                            <Button>
+                                <Icon data={shareAlt} scale="1.4" />
+                            </Button>
+                        </Popup>
                         <Button>
-                            <Icon data={twitter} />
-                        </Button>
-                        <Button>
-                            <Icon data={shoppingCart} />
+                            <Icon data={shoppingCart} scale="1.4" />
                         </Button>
                     </div>
                 </div>

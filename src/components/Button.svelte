@@ -1,8 +1,10 @@
 <script>
     import { createEventDispatcher } from "svelte";
+    let pressed = false;
     const dispatch = createEventDispatcher();
     function handleClick() {
         dispatch("message");
+        pressed = !pressed;
     }
 </script>
 
@@ -10,24 +12,23 @@
     .btn {
         border: none;
         background: none;
-        font-size: 1rem;
-        font-family: cursive;
-        font-weight: bold;
+        width: 4rem;
         padding: 0.7rem;
         box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
         border-radius: var(--rad-15);
         color: var(--primary);
-        &:active {
-            box-shadow: inset 3px 3px 4px #c2c2c2, 4px 4px 4px #f2f2f2;
-            border: none;
-            background: none;
-        }
         &:hover {
             cursor: pointer;
         }
+        &:active {
+            background: none;
+        }
+    }
+    .pressed {
+        box-shadow: inset 3px 3px 4px #c2c2c2, 4px 4px 4px #f2f2f2;
     }
 </style>
 
-<button on:click={handleClick} class="btn">
+<button on:click={handleClick} class={pressed ? 'btn pressed' : 'btn'}>
     <slot />
 </button>
