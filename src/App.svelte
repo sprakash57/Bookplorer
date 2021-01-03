@@ -27,7 +27,7 @@
 		max-width: 500px;
 		overflow-x: auto;
 		height: 90vh;
-		padding: 8px;
+		padding: 0 8px 8px 8px;
 	}
 	@media only screen and (max-width: 600px) {
 		.display-section {

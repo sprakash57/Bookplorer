@@ -1,6 +1,6 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    let pressed = false;
+    export let pressed = false;
     const dispatch = createEventDispatcher();
     function handleClick() {
         dispatch("message");
@@ -12,7 +12,6 @@
     .btn {
         border: none;
         background: none;
-        width: 4rem;
         padding: 0.7rem;
         box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
         border-radius: var(--rad-15);

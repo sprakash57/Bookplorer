@@ -3,7 +3,6 @@
     export let image, title, category, author, selfLink;
 
     function toggleSidebar() {
-        console.log("selfLink", selfLink);
         sidebarContent.update(() => selfLink);
     }
 </script>

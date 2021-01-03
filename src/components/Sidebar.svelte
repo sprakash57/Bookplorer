@@ -1,14 +1,27 @@
 <script>
     import { onDestroy } from "svelte";
     import Icon from "svelte-awesome";
+    import {
+        Twitter,
+        Facebook,
+        LinkedIn,
+    } from "svelte-share-buttons-component";
+    import { fade } from "svelte/transition";
     import { shareAlt, shoppingCart } from "svelte-awesome/icons";
     import { DEFAULT_COVER, tweetBuilder } from "../constants";
     import { sidebarContent } from "../stores";
     import Badge from "./Badge.svelte";
     import Button from "./Button.svelte";
     import Popup from "./Popup.svelte";
+    import Spinner from "./Spinner.svelte";
 
     let bookContent;
+
+    const url = "https://bookplorer-mn5g9.ondigitalocean.app/";
+
+    function closeSidebar() {
+        sidebarContent.update(() => "");
+    }
 
     const unsubscribe = sidebarContent.subscribe((value) => {
         fetch(value)
@@ -67,10 +80,21 @@
             margin-left: 0.6rem;
         }
     }
+    .close {
+        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
+        padding: 0.3rem;
+        color: var(--primary);
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-weight: bold;
+        width: 15px;
+        text-align: center;
+    }
 </style>
 
 <div>
     {#if bookContent}
+        <div on:click={closeSidebar} class="close">X</div>
         <section class="container">
             <h1>{bookContent.volumeInfo.title}</h1>
             <summary>{bookContent.volumeInfo.subtitle || ''}</summary>
@@ -91,14 +115,41 @@
                         <small>Pages</small>
                     </div>
                     <div>
-                        <Popup title={bookContent.volumeInfo.title}>
-                            <Button>
+                        <Popup let:toggled={pressed}>
+                            <Button {pressed}>
                                 <Icon data={shareAlt} scale="1.4" />
                             </Button>
+                            {#if pressed}
+                                <div class="popuptext" transition:fade>
+                                    <Twitter
+                                        class="share-button"
+                                        text={tweetBuilder(bookContent.volumeInfo.title)}
+                                        {url} />
+                                    <Facebook
+                                        class="share-button"
+                                        text={tweetBuilder(bookContent.volumeInfo.title)}
+                                        {url} />
+                                    <LinkedIn
+                                        class="share-button"
+                                        text={tweetBuilder(bookContent.volumeInfo.title)}
+                                        {url} />
+                                </div>
+                            {/if}
                         </Popup>
-                        <Button>
-                            <Icon data={shoppingCart} scale="1.4" />
-                        </Button>
+                        <Popup let:toggled={pressed}>
+                            <Button {pressed}>
+                                <Icon data={shoppingCart} scale="1.4" />
+                            </Button>
+                            {#if pressed}
+                                <div class="popuptext" transition:fade>
+                                    <a
+                                        target="__blank"
+                                        rel="noreferrer noopener"
+                                        href={`https://www.amazon.in/s?k=${bookContent.volumeInfo.title}`}>Buy
+                                        on Amazon</a>
+                                </div>
+                            {/if}
+                        </Popup>
                     </div>
                 </div>
             </section>
@@ -122,14 +173,9 @@
                 </p>
             {/if}
         </article>
-        <a
-            target="__blank"
-            class="twitter-share-button"
-            href={tweetBuilder(bookContent.volumeInfo.title)}
-            data-size="large">
-            Tweet</a>
-        <Button />
     {:else}
-        <div>Loading...</div>
+        <section style="margin-top: 24px">
+            <Spinner size="big" center />
+        </section>
     {/if}
 </div>

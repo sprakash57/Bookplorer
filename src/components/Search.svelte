@@ -1,18 +1,30 @@
 <script>
-    import { URL } from "../constants";
+    import { HTTP_STATUS, URL } from "../constants";
+    import { results, pagination, loader } from "../stores";
 
-    import { results, pagination } from "../stores";
+    let emptySearch = false;
 
     function onSubmit(e) {
         e.preventDefault();
-        fetch(`${URL}${e.target.book.value}&maxResults=12`)
-            .then((data) => data.json())
-            .then((response) => results.update(() => response))
-            .catch((err) => console.log(err));
-        pagination.update((value) => ({
-            ...value,
-            searchedTerm: e.target.book.value,
-        }));
+        if (e.target.book.value) {
+            loader.update(() => HTTP_STATUS.LOADING);
+            emptySearch = false;
+            fetch(`${URL}${e.target.book.value}&maxResults=12`)
+                .then((data) => data.json())
+                .then((response) => {
+                    results.update(() => response);
+                    loader.update(() => HTTP_STATUS.SUCCESS);
+                })
+                .catch((err) => {
+                    loader.update(() => HTTP_STATUS.FAILED);
+                });
+            pagination.update((value) => ({
+                ...value,
+                searchedTerm: e.target.book.value,
+            }));
+        } else {
+            emptySearch = true;
+        }
     }
 </script>
 
@@ -56,12 +68,25 @@
             max-width: none;
         }
     }
+    .feedback {
+        color: tomato;
+        display: block;
+    }
 </style>
 
 <main>
     <h1>Bookplorer</h1>
-    <summary>Find what you love to read.</summary>
+    <summary>Thousands of Books. Explore them, Find them.</summary>
     <section>
-        <form on:submit={onSubmit}><input type="search" name="book" /></form>
+        <form on:submit={onSubmit}>
+            <input
+                type="search"
+                name="book"
+                placeholder="Search by title or Author" />
+            {#if emptySearch}
+                <small class="feedback">*It seems you haven't provided any Book
+                    name.</small>
+            {/if}
+        </form>
     </section>
 </main>

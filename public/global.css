@@ -90,3 +90,27 @@ background: var(--primary);
 ::-webkit-scrollbar-thumb:hover {
 background: var(--primary);
 }
+
+.popuptext {
+	width: 160px;
+	background-color: #d3d1d1;
+	border-radius: var(--rad-5);
+	padding: 8px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -80px;
+}
+
+/* Popup arrow */
+.popuptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
+}
