@@ -40,7 +40,7 @@
 </style>
 
 <main>
-    <li on:click={toggleSidebar}>
+    <li on:click={toggleSidebar} title="Click to explore">
         <figure><img src={image} alt="pic" /></figure>
         <article>
             <p>{title}</p>

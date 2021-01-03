@@ -13,11 +13,14 @@
             padding: 0.5rem;
             color: var(--primary);
             font-size: 0.8rem;
+            cursor: default;
         }
     }
 </style>
 
 <p>
-    {#if categories && categories.length}<span>{categories[0]}</span>{/if}
-    {#if date}<span>{date}</span>{/if}
+    {#if categories && categories.length}
+        <span title="Genre">{categories[0]}</span>
+    {/if}
+    {#if date}<span title="Published date">{date}</span>{/if}
 </p>

@@ -8,14 +8,15 @@
     } from "svelte-share-buttons-component";
     import { fade } from "svelte/transition";
     import { shareAlt, shoppingCart } from "svelte-awesome/icons";
-    import { DEFAULT_COVER, tweetBuilder } from "../constants";
+    import { DEFAULT_COVER, HTTP_STATUS, tweetBuilder } from "../constants";
     import { sidebarContent } from "../stores";
     import Badge from "./Badge.svelte";
     import Button from "./Button.svelte";
     import Popup from "./Popup.svelte";
     import Spinner from "./Spinner.svelte";
+    import Alert from "./Alert.svelte";
 
-    let bookContent;
+    let bookContent, request;
 
     const url = "https://bookplorer-mn5g9.ondigitalocean.app/";
 
@@ -24,12 +25,16 @@
     }
 
     const unsubscribe = sidebarContent.subscribe((value) => {
+        request = HTTP_STATUS.LOADING;
         fetch(value)
             .then((res) => res.json())
             .then((data) => {
                 bookContent = data;
+                request = HTTP_STATUS.SUCCESS;
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                request = HTTP_STATUS.FAILED;
+            });
     });
 
     onDestroy(unsubscribe);
@@ -94,7 +99,7 @@
 
 <div>
     {#if bookContent}
-        <div on:click={closeSidebar} class="close">X</div>
+        <div on:click={closeSidebar} class="close" title="Hide details">X</div>
         <section class="container">
             <h1>{bookContent.volumeInfo.title}</h1>
             <summary>{bookContent.volumeInfo.subtitle || ''}</summary>
@@ -116,7 +121,7 @@
                     </div>
                     <div>
                         <Popup let:toggled={pressed}>
-                            <Button {pressed}>
+                            <Button {pressed} title="Share your find">
                                 <Icon data={shareAlt} scale="1.4" />
                             </Button>
                             {#if pressed}
@@ -137,7 +142,7 @@
                             {/if}
                         </Popup>
                         <Popup let:toggled={pressed}>
-                            <Button {pressed}>
+                            <Button {pressed} title="Buy your copy">
                                 <Icon data={shoppingCart} scale="1.4" />
                             </Button>
                             {#if pressed}
@@ -173,6 +178,8 @@
                 </p>
             {/if}
         </article>
+    {:else if request === HTTP_STATUS.FAILED}
+        <Alert />
     {:else}
         <section style="margin-top: 24px">
             <Spinner size="big" center />

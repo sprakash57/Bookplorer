@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher } from "svelte";
-    export let pressed = false;
+    export let pressed = false,
+        title = "";
     const dispatch = createEventDispatcher();
     function handleClick() {
         dispatch("message");
@@ -28,6 +29,6 @@
     }
 </style>
 
-<button on:click={handleClick} class={pressed ? 'btn pressed' : 'btn'}>
+<button on:click={handleClick} class={pressed ? 'btn pressed' : 'btn'} {title}>
     <slot />
 </button>
