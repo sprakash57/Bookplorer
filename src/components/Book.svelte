@@ -10,12 +10,12 @@
 <style lang="scss">
     li {
         border: 1px solid #e2e2e2;
+        border-radius: var(--rad-10);
         list-style-type: none;
         max-width: 70%;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+        box-shadow: 3px 3px 4px #c2c2c2, -3px -2px 4px #f2f2f2;
         &:hover {
             cursor: pointer;
-            box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.6);
         }
         figure {
             max-height: 220px;
@@ -24,6 +24,7 @@
             margin: 1px;
             img {
                 width: 100%;
+                border-radius: var(--rad-10);
             }
         }
         article {
