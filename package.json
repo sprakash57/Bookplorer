@@ -7,7 +7,8 @@
     "start": "sirv public",
     "format": "prettier --write ./src/**/*.{js,svelte,html}",
     "lint": "eslint src/**/*",
-    "lint:fix": "eslint --fix './src/**/*.{js,svelte}'"
+    "lint:fix": "eslint --fix './src/**/*.{js,svelte}'",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",
@@ -16,7 +17,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-plugin-svelte3": "^3.2.1",
-    "husky": "^7.0.2",
+    "husky": "^7.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
@@ -33,5 +34,8 @@
     "sirv-cli": "^1.0.0",
     "svelte-awesome": "^2.3.0",
     "svelte-share-buttons-component": "^1.2.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,svelte}": ["npm run format", "npm run lint:fix"]
   }
 }
