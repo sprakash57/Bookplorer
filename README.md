@@ -1,6 +1,6 @@
 # Bookplorer
 
-This project is bootstrapped with svelte(❤). Bookplorer is all about finding your favorite books, share them with your friends on social media or you can buy them. It is backed Google Books API. You can explore books with the help of volume or Author name. Decorated with neumorphic style, this app comes with lean and clean UI.
+Bookplorer is all about finding your favorite books, share them with your friends on social media or you can find online store selling them. It is backed by Google Books API. You can explore books with the help of volume or Author name. Made with Svelte and decorated with neumorphic design.
 
 ## Live Demo
 
