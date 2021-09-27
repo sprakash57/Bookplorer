@@ -1,6 +1,11 @@
 {
-  "name": "svelte-app",
+  "name": "bookplorer",
   "version": "0.9.1",
+  "author": {
+    "name": "Sunny Prakash",
+    "url": "https://suprdev.netlify.app"
+  },
+  "license": "MIT",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
