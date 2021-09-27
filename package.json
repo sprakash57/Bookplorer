@@ -7,7 +7,7 @@
     "start": "sirv public",
     "format": "prettier --write ./src/**/*.{js,svelte,html}",
     "lint": "eslint src/**/*",
-    "lint:fix": "eslint --fix './src/**/*.{js,svelte}'",
+    "lint:fix": "eslint --fix 'src/**/*'",
     "prepare": "husky install"
   },
   "devDependencies": {

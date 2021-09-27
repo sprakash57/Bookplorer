@@ -11,11 +11,11 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 1. Fork the repo and create your branch from `master`.
 2. If you've added code that should be tested, add tests.
-4. Ensure the test suite passes.
-5. Make sure your code lints.
-6. Issue that pull request.
-7. Make all your PRs with the `develop` branch
-8. Create a pull request to the `develop` branch and your pull request title must contain `[feat/bug]: your work short title`
+3. Ensure the test suite passes.
+4. Make sure your code lints.
+5. Issue that pull request.
+6. Make all your PRs with the `develop` branch
+7. Create a pull request to the `develop` branch and your pull request title must contain `[feat/bug]: your work short title`
 
 Detailed guide can be find over [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github).
 
