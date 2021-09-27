@@ -1,5 +1,6 @@
 # Bookplorer
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4aad262b-153c-4650-85c7-7cc65af3fcfb/deploy-status)](https://app.netlify.com/sites/jolly-jennings-130ccf/deploys)
 ![Open issues](https://img.shields.io/github/issues-raw/sprakash57/bookplorer?color=tomato)
 ![License](https://img.shields.io/github/license/sprakash57/bookplorer)
 
@@ -47,3 +48,6 @@ Below steps are just to synopsis. Make sure to look into [CONTRIBUTING.md](https
 5. Star ⭐ to the repo would be much appreciated.
 
 
+## License
+
+Bookplorer is an open source software licensed as MIT.
