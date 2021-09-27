@@ -9,7 +9,8 @@ Bookplorer is all about finding your favorite books, share them with your friend
 ## Live Demo
 
 Latest: https://bookplorer.netlify.app
-Prod: https://bookplorer-mn5g9.ondigitalocean.app
+
+Prod (v0.9.1): https://bookplorer-mn5g9.ondigitalocean.app
 
 ## Technology stack
 
