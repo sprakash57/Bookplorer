@@ -10,8 +10,10 @@
     width: 500px;
     max-width: 500px;
     overflow-x: auto;
-    height: 90vh;
+    height: 100vh;
     padding: 0 8px 8px 8px;
+    border-left: 1px solid rgb(61 133 255 / 49%);
+    box-shadow: 2px 3px 16px 0px rgb(61 133 255 / 49%);
   }
   @media only screen and (max-width: 600px) {
     .display-section {
